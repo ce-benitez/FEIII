@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Posteos from "./components/Posteos"
+import Estatus from "./components/Estatus"
+import "./index.css"
+// El componente App es el padre de:
+// - Estatus
+// - Posteos
+// ESTADO: App debe manejar en su estado un número para contabilizar el total de likes.
+// MÉTODOS: App debe tener un método para aumentar este número y que pueda ser ejecutado por su nieto Post.
+// PROPS: App deberá pasar por props lo necesario a sus componenetes internos para que manipulen o lean su estado.
 
-function App() {
+const App = () => {
+
+  const [countTotalLikes, setCountTotalLikes] = useState(0);
+
+  const incrementsLikes = () => {
+    setCountTotalLikes(countTotalLikes+1);
+    console.log(countTotalLikes)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <body>
+      <nav>
+        <Estatus countTotalLikes={countTotalLikes}/>
+      </nav>
+        <Posteos incrementsLikes={incrementsLikes}/>
+    </body>
   );
 }
 
